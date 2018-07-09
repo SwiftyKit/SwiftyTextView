@@ -1,5 +1,4 @@
-SwiftyTextView
-===================
+# SwiftyTextView
 
 [![License](https://img.shields.io/:license-mit-blue.svg)](https://doge.mit-license.org)
 [![Language](https://img.shields.io/badge/language-swift-orange.svg?style=flat)](https://developer.apple.com/swift)
@@ -25,7 +24,7 @@ pod 'SwiftyTextView'
 
 > **Manual:**
 
-drag 'n drop SwiftyTextView.swift into your project.
+Drag 'n drop SwiftyTextView.swift into your project.
  
 
 ## How to use 
@@ -54,6 +53,10 @@ let textView:SwiftyTextView = SwiftyTextView.init(frame: CGRect.init(x: X, y: Y,
       textView.showTextCountView = true
       self.view.addSubview(txtfield)
 ```
+
+## Requirements
+- Swift 3.0+
+- iOS 8.0+
 
 ## Contact & Contribute
 
