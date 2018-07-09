@@ -24,7 +24,7 @@ pod 'SwiftyTextView'
 
 > **Manual:**
 
-> - drag 'n drop SwiftyTextView.swift into your project.
+drag 'n drop SwiftyTextView.swift into your project.
 
 ----------
 
@@ -33,7 +33,7 @@ How to use
 
 > **Interface Builder:** 
 
-> - Select the UITextView you want to use and change the class to SwiftyTextfields.
+Select the UITextView you want to use and change the class to SwiftyTextView.
 
 
  - Placeholder text
@@ -43,13 +43,9 @@ How to use
 
 You can see the changes directly on the Interface Builder!
 
-----------
-
 > **Programatically:** 
 
-## Menual installation
-
-Make SwiftyTextFielf programatically
+Make SwiftyTextView programatically
 
 ```ruby
 let textView:SwiftyTextView = SwiftyTextView.init(frame: CGRect.init(x: X, y: Y, width: WIDTH, height: HEIGHT))
@@ -69,6 +65,6 @@ Contact & Contribute
  - Fork the project and make your own changes
 
  
-## License
-
+License
+-------------
 SwiftyTextField is available under the MIT license. See the LICENSE file for more info.
