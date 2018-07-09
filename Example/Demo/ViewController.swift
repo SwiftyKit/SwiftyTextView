@@ -7,12 +7,17 @@
 //
 
 import UIKit
+import SwiftyTextView
 
 class ViewController: UIViewController {
-
+    @IBOutlet weak var textView: SwiftyTextView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        textView.layer.borderColor = UIColor.lightGray.cgColor
+        textView.layer.borderWidth = 0.5
+        
     }
 
     override func didReceiveMemoryWarning() {

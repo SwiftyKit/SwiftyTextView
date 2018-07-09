@@ -1,31 +1,52 @@
 //
-//  NiceTextView.swift
-//  NiceTextView
+//  SwiftyTextView.swift
+//  SwiftyTextView
 //
-//  Created by John on 07/06/2017.
-//  Copyright © 2017 com.sherry.NiceTextView. All rights reserved.
+//  Created by SwiftyKit on 07/06/2018.
+//  Copyright © 2018 com.swiftykit.SwiftyTextView. All rights reserved.
 //
 
 import UIKit
 
-class SwiftyTextView: UITextView {
+@IBDesignable
+open class SwiftyTextView: UITextView {
 
     /**
-     * 自定义区域 ------ Start
+     * UI Customization ------ Start
      */
     
-    var placeholderColor: UIColor = UIColor.lightGray // placeholder的字体颜色
+    @IBInspectable open var placeholderColor: UIColor = UIColor.lightGray { // placeholder color
+        didSet {
+            setNeedsLayout()
+        }
+    }
     
-    var placeholder: String = "请输入处理备注" // placeholder的内容
+    @IBInspectable open var placeholder: String = "Please input text..." { // placeholder content
+        didSet {
+            setNeedsLayout()
+        }
+    }
     
-    var minNumberOfWords = 0 // 默认从0开始计数
+    @IBInspectable open var minNumberOfWords = 0 {// start from 0 by default
+        didSet {
+            setNeedsLayout()
+        }
+    }
     
-    var maxNumberOfWords = 30 // 默认最多输入30个字
+    @IBInspectable open var maxNumberOfWords = 30 { // max num is 30 by default
+        didSet {
+            setNeedsLayout()
+        }
+    }
     
-    var showTextCountView: Bool = true
+    @IBInspectable open var showTextCountView: Bool = true {
+        didSet {
+            setNeedsLayout()
+        }
+    }
     
     /**
-     * 自定义区域 ------ End
+     * UI Customization ------ End
      */
     
     var textLayer: CATextLayer!
@@ -34,13 +55,13 @@ class SwiftyTextView: UITextView {
     
     weak var swiftyDelegate: SwiftyTextViewDelegate?
     
-    override func awakeFromNib() {
+    override open func awakeFromNib() {
         super.awakeFromNib()
         
         delegate = self
     }
     
-    override func layoutSubviews() {
+    override open func layoutSubviews() {
         super.layoutSubviews()
         
         if textLayer == nil {
@@ -99,13 +120,12 @@ class SwiftyTextView: UITextView {
 
 extension SwiftyTextView: UITextViewDelegate {
     
-    func textViewDidChange(_ textView: UITextView) {
+    public func textViewDidChange(_ textView: UITextView) {
         
         guard showTextCountView == true else {
             return
         }
         
-        // 因为要处理中文输入，所以这个计数放到textViewDidChange了
         countdownTextLayer.string = "\(text.count)/\(maxNumberOfWords)"
         
         textLayer.isHidden = text.count > 0
@@ -115,7 +135,7 @@ extension SwiftyTextView: UITextViewDelegate {
         }
     }
     
-    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+    public func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
         
         var result: Bool = true
         let oldText = textView.text as NSString
