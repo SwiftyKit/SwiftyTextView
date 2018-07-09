@@ -9,47 +9,66 @@ SwiftyTextView - an iOS enhanced TextView with placeholder and limit characters 
 ![enter image description here](https://raw.githubusercontent.com/SwiftyKit/SwiftyTextView/master/Images/screenshot.gif)
 
 ----------
-**IBInspectable** attributes accessible from the identity inspector. 
-
- - Corner radius
- - Border width
- - Border color
- - Left image
- - Left image width, height, padding
- - Shadow
- - Shadow radius, color, opacity
- - Textfield height
-
-You can see the changes directly on the storyboard!
-
-----------
-
-
+ 
 Installation
 -------------
 
 > **Cocoapods:**
 
-> Coming soon...
+SwiftyTextField is available through [CocoaPods](http://cocoapods.org). To install
+it, simply add the following line to your Podfile:
+
+```ruby
+pod 'SwiftyTextView'
+```
 
 > **Manual:**
 
-> - drag 'n drop SwiftyAvatar.swift into your project.
+> - drag 'n drop SwiftyTextView.swift into your project.
 
 ----------
 
 How to use
 -------------
 
-> **Storyboard:** 
+> **Interface Builder:** 
 
-> - Select the UITextfied you want to use and change the class to SwiftyTextfields.
+> - Select the UITextView you want to use and change the class to SwiftyTextfields.
+
+
+ - Placeholder text
+ - Placeholder color
+ - Limit number of characters
+ - Show text count view
+
+You can see the changes directly on the Interface Builder!
 
 ----------
+
+> **Programatically:** 
+
+## Menual installation
+
+Make SwiftyTextFielf programatically
+
+```ruby
+let textView:SwiftyTextView = SwiftyTextView.init(frame: CGRect.init(x: X, y: Y, width: WIDTH, height: HEIGHT))
+      textView.backgroundColor = .red
+      textView.placeholder = "Please input text..."
+      textView.placeholderColor = UIColor.lightGray
+      textView.minNumberOfWords = 0
+      textView.maxNumberOfWords = 30
+      textView.showTextCountView = true
+      self.view.addSubview(txtfield)
+```
 
 Contact & Contribute
 -------------
 
- - Feel free to contact me with ideas or suggestions at kalaitzidis34@gmail.com
+ - Feel free to contact me with ideas or suggestions at swiftykit@gmail.com
  - Fork the project and make your own changes
 
+ 
+## License
+
+SwiftyTextField is available under the MIT license. See the LICENSE file for more info.
