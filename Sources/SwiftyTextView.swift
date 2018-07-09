@@ -27,13 +27,13 @@ open class SwiftyTextView: UITextView {
         }
     }
     
-    @IBInspectable open var minNumberOfWords = 0 {// start from 0 by default
+    @IBInspectable open var minNumberOfWords: Int = 0 {// start from 0 by default
         didSet {
             setNeedsLayout()
         }
     }
     
-    @IBInspectable open var maxNumberOfWords = 30 { // max num is 30 by default
+    @IBInspectable open var maxNumberOfWords: Int = 30 { // max num is 30 by default
         didSet {
             setNeedsLayout()
         }
