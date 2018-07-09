@@ -4,7 +4,7 @@ SwiftyTextView
 [![3.0](https://img.shields.io/badge/Swift%203.0--green.svg)](https://developer.apple.com/swift/)
 [![MIT](https://img.shields.io/github/license/mashape/apistatus.svg)](https://opensource.org/licenses/MIT)
 
-SwiftyTextView - an iOS enhanced TextView with placeholder and limit characters count support.
+### SwiftyTextView - an iOS enhanced TextView with placeholder and limit characters count support.
 --------------------------------------
 ![enter image description here](https://raw.githubusercontent.com/SwiftyKit/SwiftyTextView/master/Images/screenshot.gif)
 
@@ -43,10 +43,8 @@ Select the UITextView you want to use and change the class to SwiftyTextView.
 
 You can see the changes directly on the Interface Builder!
 
-> **Programatically:** 
-
-Make SwiftyTextView programatically
-
+> **Coding:** 
+ 
 ```ruby
 let textView:SwiftyTextView = SwiftyTextView.init(frame: CGRect.init(x: X, y: Y, width: WIDTH, height: HEIGHT))
       textView.backgroundColor = .red
