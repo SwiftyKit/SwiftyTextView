@@ -14,7 +14,7 @@ SwiftyTextView is an iOS enhanced TextView with placeholder and limit characters
  
 > **Cocoapods:**
 
-SwiftyTextField is available through [CocoaPods](http://cocoapods.org). To install
+SwiftyTextView is available through [CocoaPods](http://cocoapods.org). To install
 it, simply add the following line to your Podfile:
 
 ```ruby
@@ -65,4 +65,4 @@ let textView:SwiftyTextView = SwiftyTextView.init(frame: CGRect.init(x: X, y: Y,
  
 ## License
 
-SwiftyTextField is available under the MIT license. See the LICENSE file for more info.
+SwiftyTextView is available under the MIT license. See the LICENSE file for more info.
