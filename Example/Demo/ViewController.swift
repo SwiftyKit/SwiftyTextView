@@ -2,7 +2,7 @@
 //  ViewController.swift
 //  Demo
 //
-//  Created by lingzhao on 2018/7/6.
+//  Created by SiwftyKit on 2018/7/6.
 //  Copyright © 2018年 apple. All rights reserved.
 //
 
