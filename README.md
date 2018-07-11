@@ -12,7 +12,7 @@ SwiftyTextView is an iOS enhanced TextView with placeholder and limit characters
  
 ## Installation
  
-> **Cocoapods:**
+### CocoaPods 
 
 SwiftyTextView is available through [CocoaPods](http://cocoapods.org). To install
 it, simply add the following line to your Podfile:
@@ -21,14 +21,14 @@ it, simply add the following line to your Podfile:
 pod 'SwiftyTextView'
 ```
 
-> **Manual:**
+###### Manual
 
 Drag 'n drop SwiftyTextView.swift into your project.
  
 
-## How to use 
+## Usage 
 
-> **Interface Builder:** 
+### Interface Builder 
 
 Select the UITextView you want to use and change the class to SwiftyTextView.
 
@@ -40,9 +40,9 @@ Select the UITextView you want to use and change the class to SwiftyTextView.
 
 You can see the changes directly on the Interface Builder!
 
-> **Coding:** 
+### Code
  
-```ruby
+```swift
 let textView:SwiftyTextView = SwiftyTextView.init(frame: CGRect.init(x: X, y: Y, width: WIDTH, height: HEIGHT))
       textView.backgroundColor = .red
       textView.placeholder = "Please input text..."
