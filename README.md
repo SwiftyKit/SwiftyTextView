@@ -21,7 +21,7 @@ it, simply add the following line to your Podfile:
 pod 'SwiftyTextView'
 ```
 
-###### Manual
+### Manual
 
 Drag 'n drop SwiftyTextView.swift into your project.
  
