@@ -16,7 +16,7 @@ Pod::Spec.new do |s|
   #
 
   s.name         = "SwiftyTextView"
-  s.version      = "0.1.1"
+  s.version      = "0.1.2"
   s.summary      = "An iOS TextView with placeholder and limit characters count support"
 
   # This description is used to generate tags and improve search results.
@@ -66,6 +66,7 @@ Pod::Spec.new do |s|
 
   # s.platform     = :ios
   s.platform     = :ios, "8.0"
+  s.swift_version = '3.2'
 
   #  When using multiple platforms
   # s.ios.deployment_target = "5.0"
@@ -80,8 +81,8 @@ Pod::Spec.new do |s|
   #  Supports git, hg, bzr, svn and HTTP.
   #
 
-  s.source       = { :git => "https://github.com/SwiftyKit/SwiftyTextView.git"}
-  #s.source       = { :git => "https://github.com/SwiftyKit/SwiftyTextView.git", :tag => "#{s.version}" }
+  #s.source       = { :git => "https://github.com/SwiftyKit/SwiftyTextView.git"}
+  s.source       = { :git => "https://github.com/SwiftyKit/SwiftyTextView.git", :tag => "#{s.version}" }
 
   # ――― Source Code ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
   #
