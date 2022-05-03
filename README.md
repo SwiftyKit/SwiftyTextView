@@ -54,8 +54,8 @@ let textView:SwiftyTextView = SwiftyTextView.init(frame: CGRect.init(x: X, y: Y,
 ```
 
 ## Requirements
-- Swift 3.0+
-- iOS 8.0+
+- Swift 5.0+
+- iOS 9.0+
 
 ## Contact & Contribute
 
