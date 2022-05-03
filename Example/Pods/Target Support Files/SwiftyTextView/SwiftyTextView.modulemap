@@ -1,6 +1,0 @@
-framework module SwiftyTextView {
-  umbrella header "SwiftyTextView-umbrella.h"
-
-  export *
-  module * { export * }
-}
