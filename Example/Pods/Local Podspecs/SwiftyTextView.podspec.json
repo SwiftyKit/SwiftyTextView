@@ -1,6 +1,6 @@
 {
   "name": "SwiftyTextView",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "summary": "An iOS TextView with placeholder and limit characters count support",
   "description": "SwiftyTextView is a enhanced TextView with placeholder and limit characters count support for iOS.",
   "homepage": "https://github.com/SwiftyKit/SwiftyTextView",
@@ -12,15 +12,18 @@
     "SwiftyKit": "swiftykit@gmail.com"
   },
   "platforms": {
-    "ios": "8.0"
+    "ios": "9.0"
   },
+  "swift_versions": "5.0",
   "source": {
-    "git": "https://github.com/SwiftyKit/SwiftyTextView.git"
+    "git": "https://github.com/SwiftyKit/SwiftyTextView.git",
+    "tag": "0.2.0"
   },
   "source_files": [
     "Sources/*.swift",
     "Sources/SwiftyTextView.h",
     "Sources/SwiftyTextView.swift"
   ],
-  "exclude_files": "Classes/Exclude"
+  "exclude_files": "Classes/Exclude",
+  "swift_version": "5.0"
 }

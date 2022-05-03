@@ -9,7 +9,7 @@
 import UIKit
 
 @IBDesignable
-open class SwiftyTextView: UITextView {
+public class SwiftyTextView: UITextView {
 
     /**
      * UI Customization ------ Start
@@ -39,7 +39,7 @@ open class SwiftyTextView: UITextView {
         }
     }
     
-    @IBInspectable open var showTextCountView: Bool = true {
+    @IBInspectable open var showTextCountView: Bool = false {
         didSet {
             setNeedsLayout()
         }
@@ -48,100 +48,101 @@ open class SwiftyTextView: UITextView {
     /**
      * UI Customization ------ End
      */
+
+    private var placeHolderTextLayer: CATextLayer!
+    private var countdownTextLayer: CATextLayer!
     
-    var textLayer: CATextLayer!
+    public weak var textDelegate: SwiftyTextViewDelegate?
     
-    var countdownTextLayer: CATextLayer!
-    
-    weak var swiftyDelegate: SwiftyTextViewDelegate?
+    public override var text: String! {
+        // boilerplate code needed to make watchers work properly:
+        get {
+            return super.text
+        }
+        set {
+            super.text = newValue
+            NotificationCenter.default.post(
+                name: UITextView.textDidChangeNotification,
+                object: self)
+        }
+
+    }
     
     override open func awakeFromNib() {
         super.awakeFromNib()
-        
         delegate = self
+    }
+    
+    public init(frame: CGRect = .zero) {
+        super.init(frame: frame, textContainer: nil)
+        delegate = self
+    }
+    
+    required public init?(coder: NSCoder) {
+        super.init(coder: coder)
     }
     
     override open func layoutSubviews() {
         super.layoutSubviews()
         
-        if textLayer == nil {
+        let defaultFont = font ?? UIFont.systemFont(ofSize: 17.0)
+        
+        if placeHolderTextLayer == nil {
+            placeHolderTextLayer = CATextLayer()
+            placeHolderTextLayer.contentsScale = UIScreen.main.scale
+            placeHolderTextLayer.alignmentMode = CATextLayerAlignmentMode.left
+            placeHolderTextLayer.backgroundColor = UIColor.clear.cgColor
+            placeHolderTextLayer.foregroundColor = placeholderColor.cgColor
+            placeHolderTextLayer.font = defaultFont
+            placeHolderTextLayer.fontSize = defaultFont.pointSize
             
-            textLayer = CATextLayer()
-            
-            textLayer.contentsScale = UIScreen.main.scale
-            
-            textLayer.alignmentMode = kCAAlignmentLeft
-            textLayer.backgroundColor = UIColor.clear.cgColor
-            textLayer.foregroundColor = placeholderColor.cgColor
-            textLayer.font = font
-            textLayer.fontSize = font!.pointSize
-            
-            textLayer.string = placeholder
-            textLayer.frame = CGRect(origin: CGPoint(x: 5, y: bounds.minY + 8), size: bounds.size)
-            
-            layer.insertSublayer(textLayer, at: 0)
+            placeHolderTextLayer.string = placeholder
+            placeHolderTextLayer.frame = CGRect(origin: CGPoint(x: 5, y: bounds.minY + 8), size: bounds.size)
+            layer.insertSublayer(placeHolderTextLayer, at: 0)
         }
         
         if showTextCountView {
-        
             if countdownTextLayer == nil {
-                
                 countdownTextLayer = CATextLayer()
-                
                 countdownTextLayer.contentsScale = UIScreen.main.scale
-                
-                countdownTextLayer.alignmentMode = kCAAlignmentRight
+                countdownTextLayer.alignmentMode = CATextLayerAlignmentMode.right
                 countdownTextLayer.backgroundColor = UIColor.clear.cgColor
                 countdownTextLayer.foregroundColor = placeholderColor.cgColor
-                countdownTextLayer.font = font
-                countdownTextLayer.fontSize = font!.pointSize
-                
+                countdownTextLayer.font = defaultFont
+                countdownTextLayer.fontSize = defaultFont.pointSize
                 
                 let tempLabel = UILabel()
                 let tempText = "\(maxNumberOfWords)/\(maxNumberOfWords)"
-                
                 tempLabel.text = tempText
                 tempLabel.font = font
                 tempLabel.sizeToFit()
-                
                 countdownTextLayer.frame = tempLabel.frame
-                
                 countdownTextLayer.string = "\(minNumberOfWords)/\(maxNumberOfWords)"
-                
                 layer.addSublayer(countdownTextLayer)
             }
-            
             countdownTextLayer.frame.origin = CGPoint(x: bounds.size.width - countdownTextLayer.bounds.size.width, y: bounds.size.height - countdownTextLayer.bounds.size.height + contentOffset.y)
         }
-        
-        delegate!.textViewDidChange!(self)
+        delegate?.textViewDidChange?(self)
     }
 }
 
 extension SwiftyTextView: UITextViewDelegate {
-    
     public func textViewDidChange(_ textView: UITextView) {
-        
-        guard showTextCountView == true else {
-            return
+        placeHolderTextLayer.isHidden = text.count > 0
+ 
+        if showTextCountView {
+            countdownTextLayer.string = "\(text.count)/\(maxNumberOfWords)"
         }
         
-        countdownTextLayer.string = "\(text.count)/\(maxNumberOfWords)"
-        
-        textLayer.isHidden = text.count > 0
-        
-        if let delegate = swiftyDelegate, delegate.responds(to: #selector(SwiftyTextViewDelegate.textViewDidChange(_:))) {
-            delegate.textViewDidChange!(textView)
-        }
+        textDelegate?.textViewDidChange?(textView)
     }
     
     public func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
-        
         var result: Bool = true
         let oldText = textView.text as NSString
         let newText = oldText.replacingCharacters(in: range, with: text)
         
-        if let delegate = swiftyDelegate, delegate.responds(to: #selector(SwiftyTextViewDelegate.textView(_:shouldChangeTextIn:replacementText:))) {
+        if let delegate = textDelegate, delegate.responds(to: #selector(SwiftyTextViewDelegate.textView(_:shouldChangeTextIn:replacementText:))) {
             result = delegate.textView!(textView, shouldChangeTextIn: range, replacementText: text)
         }
 
@@ -154,34 +155,45 @@ extension SwiftyTextView: UITextViewDelegate {
         } else {
             return result
         }
+    }
+     
+    public func textViewDidBeginEditing(_ textView: UITextView) {
+        textDelegate?.textViewDidBeginEditing?(textView)
+    }
 
+    public func textViewDidEndEditing(_ textView: UITextView) {
+        textDelegate?.textViewDidEndEditing?(textView)
+    }
+    
+    public func textViewShouldBeginEditing(_ textView: UITextView) -> Bool {
+        return textDelegate?.textViewShouldBeginEditing?(textView) ?? true
+    }
+    
+    public func textViewShouldEndEditing(_ textView: UITextView) -> Bool {
+        return textDelegate?.textViewShouldEndEditing?(textView) ?? true
+    }
+    
+    public func textViewDidChangeSelection(_ textView: UITextView) {
+        placeHolderTextLayer.isHidden = text.count > 0
+        textDelegate?.textViewDidChangeSelection?(textView)
+    }
+    
+    public func textView(_ textView: UITextView, shouldInteractWith URL: URL, in characterRange: NSRange) -> Bool {
+        return textDelegate?.textView?(textView, shouldInteractWith: URL, in: characterRange) ?? true
     }
 }
-
 
 //MARK: -
 //MARK: delegate
 
-
 @objc public protocol SwiftyTextViewDelegate: NSObjectProtocol {
-    
-    
     @objc optional func textViewShouldBeginEditing(_ textView: UITextView) -> Bool
- 
     @objc optional func textViewShouldEndEditing(_ textView: UITextView) -> Bool
-    
     @objc optional func textViewDidBeginEditing(_ textView: UITextView)
-    
     @objc optional func textViewDidEndEditing(_ textView: UITextView)
-    
-    
     @objc optional func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool
-    
     @objc optional func textViewDidChange(_ textView: UITextView)
-    
     @objc optional func textViewDidChangeSelection(_ textView: UITextView)
-    
     @objc optional func textView(_ textView: UITextView, shouldInteractWith URL: URL, in characterRange: NSRange) -> Bool
-    
 }
 

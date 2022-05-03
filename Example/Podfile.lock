@@ -1,5 +1,5 @@
 PODS:
-  - SwiftyTextView (0.1.1)
+  - SwiftyTextView (0.2.0)
 
 DEPENDENCIES:
   - SwiftyTextView (from `../`)
@@ -9,8 +9,8 @@ EXTERNAL SOURCES:
     :path: "../"
 
 SPEC CHECKSUMS:
-  SwiftyTextView: 3f2cf5698daff2327ca3c575e680fa6704e21a7c
+  SwiftyTextView: be873b6b426d148fef9e2a341b3c5989b167572b
 
 PODFILE CHECKSUM: 6b2e239cdf4b6d864c6b3404df8ba4124b149b47
 
-COCOAPODS: 1.5.0
+COCOAPODS: 1.11.2
